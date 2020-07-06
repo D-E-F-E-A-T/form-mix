@@ -1,0 +1,265 @@
+:root {
+    --primary-color:#191970b6;
+    --bg-color: #9dd2da;
+    --text-color: #f8f0f5;
+    --light-color: rgba(255, 255, 255, 8.04);
+    --form-bg:  #6c7b8b46;
+    --quad: #63acac49;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-family: "Roboto", sans-serif;
+    height: 100%;
+}
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.main {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label#darkmode {
+    margin-bottom: 0;
+    cursor: pointer;
+    width: 25px;
+    height: 17px;
+    background: rgba(128, 128, 128, 0.363);
+    float: right;
+    border-radius: 100px;
+    position: relative;
+
+    z-index: 4;
+}
+
+label#darkmode2 {
+    cursor: pointer;
+    width: 25px;
+    float: right;
+    margin: 10px;
+    height: 17px;
+    background: rgba(128, 128, 128, 0.363);
+    border-radius: 100px;
+    position: relative;
+
+    z-index: 4;
+}
+
+input[type=checkbox] {
+    background: rgba(128, 128, 128, 0.712);
+    position: relative; 
+    cursor: pointer;
+    opacity: 0.01;
+    width: 25px;
+    height: 17px;
+    z-index: 3;
+}
+
+label#darkmode::after,
+label#darkmode2::after{
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    top:5px;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.555);
+    border-radius: 90px;
+    transition: 1s;
+}
+
+form {
+    animation-name: fade;
+    animation-duration: 5s;
+
+    width: 100%;
+    max-width: 500px;
+    margin: 32px auto;
+    padding: 32px 64px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border-radius: 8px;
+
+    z-index: 2;
+
+    background: var(--form-bg);
+}
+
+/*  rgb(46, 46, 46); #6c7b8b46 */
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }to {
+        opacity: 1;
+    }
+}
+
+form h2 {
+    align-self: center;
+    margin-bottom: 40px;
+
+    font-size: 40px;
+    font-family: 'Lobster', sans-serif;
+}
+
+/* poderiamos usar :nth-child(N) onde n=numero do campo */
+
+div.input {
+    margin-bottom: 5px;
+    position: relative;
+
+    animation-name: move;
+    animation-duration: 3s;
+    /* animation-delay: 500ms; 
+    animation-fill-mode: backwards;*/
+}
+@keyframes move {
+    from {
+        opacity: 0;
+        transform: translateX(-70%);
+    }to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+input.data,
+button#send {
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+
+    width: 100%;
+    padding: 16px 0;
+    margin-bottom: 20px;
+    border:none;
+    border-bottom: 1px solid var(--primary-color);
+
+    outline: none;
+    color: var(--text-color);
+    font-size: 1em;
+
+    background-color: transparent;
+}
+
+button#send {
+    animation-name: move;
+    animation-duration: 1s;
+    animation-delay: 200ms; 
+    animation-fill-mode: backwards;
+
+    align-self: center;
+    margin-top: 26px;
+    max-width: 150px;
+
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+input ~ label {
+    position: absolute;
+    top: 16px;
+    left: 0;
+
+    color: rgba(255, 255, 255, 0.6) ;
+    transition: .4s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+    transform: translateY(-24px);
+    font-size: 0.8em;
+    letter-spacing: 0.1em;
+}
+
+
+.input span.error {
+    display: flex;
+    padding: 0;
+
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.input span.error.active {
+    border: 1px solid red;
+    padding: 0.4em;
+}
+
+.form-hide {
+    animation-name: down ;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out; /*= cubic-bezier: (0-1)*/ 
+    /* animation-timing-function: steps(1-); */
+}
+
+@keyframes down {
+    from {
+        transform: translateY(0);
+    } to {
+        transform: translateY(100vh);
+    }
+}
+
+.validate-error {
+    animation: treme 70ms linear, fade paused;
+    animation-iteration-count: 5;
+}
+@keyframes treme {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-5%);
+    }    
+    0% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(5%);
+    }    
+}
+
+body {
+    overflow: hidden;
+}
+
+.quadrados li {
+    width: 35px;
+    height: 35px;
+    background-color: var(--quad);
+    display: block;
+    position: absolute;
+    bottom: -35px;
+    animation: up infinite;
+    animation-direction: alternate;
+
+    z-index: 1;
+}
+
+@keyframes up {
+    from {
+        transform: translateY(0);
+    } to {
+        opacity: 0;
+        transform: translateY(-1000px) rotate(960deg);
+    }
+}

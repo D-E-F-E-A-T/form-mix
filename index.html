@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation with HTML API</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <label for="darkmode" id="darkmode2">
+    <input type="checkbox" id="darkmode2">
+  </label>
+  <div class="main">
+  <form action="">
+  <label for="darkmode" id="darkmode">
+    <input type="checkbox" id="darkmode">
+  </label>
+    <h2>
+      Entrar na lista
+    </h2>
+
+    <div class="input">
+      <input required type="text" class="data" />
+      <label>Nome</label>
+      <span class="error"></span>
+    </div>
+
+
+    <div class="input">
+      <input required type="email" class="data"/>
+      <label>Email</label>
+      <span class="error"></span>
+    </div>
+
+    <button id="send">Enviar</button>
+
+  </form>
+</div>
+
+    <ul class="quadrados">
+    </ul>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
