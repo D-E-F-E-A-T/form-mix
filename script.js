@@ -2,7 +2,7 @@ const btnSubmit = document.querySelector ("button#send");
 const form = document.querySelector("form");
 
 btnSubmit.addEventListener("click", event => {
-        const fields = [ ... document.querySelectorAll("input")]
+    const fields = [ ... document.querySelectorAll("input")]
 
         function validateField(field) {
             function verifyErrors() {
@@ -58,7 +58,6 @@ btnSubmit.addEventListener("click", event => {
             validation()
         }
 
-        const fields = [ ... document.querySelectorAll("input")]
         fields.forEach(field => {
             if (field.value == "") form.classList.add("validate-error")
                 field.addEventListener("invalid", event => {
