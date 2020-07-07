@@ -2,13 +2,71 @@ const btnSubmit = document.querySelector ("button#send");
 const form = document.querySelector("form");
 
 btnSubmit.addEventListener("click", event => {
-    event.preventDefault(); //tira o submit
+        const fields = [ ... document.querySelectorAll("input")]
+
+        function validateField(field) {
+            function verifyErrors() {
+                let foundError = false;
+        
+                for (error in field.validity){
+                    if (field.validity[error] && !field.validity.valid[error]){
+                        foundError = true
+                    }
+                }
+                return foundError;
+            }   
+          
+            function customMessage(typeError) {
+                const messages = {
+                    text: {
+                        valueMissing: "Por favor, preencha este campo"
+                    },
+                    email: {
+                        valueMissing: "E-mail é obrigatório",
+                        typeMissmatch: "Por favor, preencha um e-mail válido"
+                    }
+                }
+                return messages[field.type][typeError]
+            }
+        
+            function setCustomMessage (message) {
+                const spanError = field.parentNode.querySelector("span.error")
+                if (message) {
+                    spanError.classList.add("active")
+                    spanError.innerHTML = customMessage()
+                } else {
+                    spanError.classList.remove("active")
+                    spanError.innerHTML = ""
+                }
+            }
+            return function () {
+                const error = verifyErrors()
+                if (verifyErrors()) {
+                    const message = customMessage(error)
+                    field.style.borderColor = "red"
+                    setCustomMessage()
+                } else {
+                    field.style.borderColor = "green"
+                    setCustomMessage()
+                }
+            }
+        }
+        
+        function customValidation(event) {
+            const field = event.target
+            const validation = validateField(field)
+            validation()
+        }
 
         const fields = [ ... document.querySelectorAll("input")]
         fields.forEach(field => {
             if (field.value == "") form.classList.add("validate-error")
-        });
-
+                field.addEventListener("invalid", event => {
+                event.preventDefault(),
+                customValidation(event)
+                });
+                field.addEventListener("blur", customValidation)
+            }) 
         const formError = document.querySelector(".validate-error");
         if (formError) {
             formError.addEventListener("animationend", event =>{
