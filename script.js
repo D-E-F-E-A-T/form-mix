@@ -2,69 +2,71 @@ const btnSubmit = document.querySelector ("button#send");
 const form = document.querySelector("form");
 
 btnSubmit.addEventListener("click", event => {
-    const fields = [ ... document.querySelectorAll("input")]
+    const fields = [ ... document.querySelectorAll("input")];
 
-        function validateField(field) {
-            function verifyErrors() {
-                let foundError = false;
-        
-                for (error in field.validity){
-                    if (field.validity[error] && !field.validity.valid[error]){
-                        foundError = true
-                    }
-                }
-                return foundError;
-            }   
+    function validateField(field) {
+        function verifyErrors() {
+            let foundError = false;
+            for (error in field.validity){
+            if (field.validity[error] && !field.validity.valid){
+            foundError = error
+               }
+            }
+            return foundError;
+        }   
           
-            function customMessage(typeError) {
-                const messages = {
-                    text: {
-                        valueMissing: "Por favor, preencha este campo"
+        function customMessage(typeError) {
+            const messages = {
+                text: {
+                    valueMissing: "Você não pode deixar em branco!"
                     },
-                    email: {
-                        valueMissing: "E-mail é obrigatório",
-                        typeMissmatch: "Por favor, preencha um e-mail válido"
+                email: {
+                    valueMissing: "Seu e-mail é importante",
+                    typeMissmatch: "Por favor, preencha um e-mail válido"
                     }
                 }
-                return messages[field.type][typeError]
-            }
-        
-            function setCustomMessage (message) {
-                const spanError = field.parentNode.querySelector("span.error")
-                if (message) {
-                    spanError.classList.add("active")
-                    spanError.innerHTML = customMessage()
-                } else {
-                    spanError.classList.remove("active")
-                    spanError.innerHTML = ""
-                }
-            }
-            return function () {
-                const error = verifyErrors()
-                if (verifyErrors()) {
-                    const message = customMessage(error)
-                    field.style.borderColor = "red"
-                    setCustomMessage()
-                } else {
-                    field.style.borderColor = "green"
-                    setCustomMessage()
-                }
-            }
+            return messages[field.type][typeError]
         }
         
-        function customValidation(event) {
-            const field = event.target
-            const validation = validateField(field)
-            validation()
+        function setCustomMessage (message) {
+            const spanError = field.parentNode.querySelector("span.error")
+            if (message) {
+                spanError.classList.add("active")
+                spanError.innerHTML = customMessage()
+            } else {
+                spanError.classList.remove("active")
+                spanError.innerHTML = ""
+            }
         }
+        return function () {
+         const error = verifyErrors()
+        
+            if (error) {
+                const message = customMessage(error)
+                field.style.borderColor = "red"
+                setCustomMessage()
+                } 
+            else {
+                field.style.borderColor = "green"
+                setCustomMessage()
+            }    
+        }
+    }    
+        
+    function customValidation(event) {
+        const field = event.target
+        const validation = validateField(field)
+        
+        validation()
+    }
 
-        fields.forEach(field => {
+    fields.forEach(field => {
+        field.addEventListener("invalid", event => {
+            event.preventDefault(),
+            customValidation(event)
+        })
+        field.addEventListener("blur", customValidation)
             if (field.value == "") form.classList.add("validate-error")
-                field.addEventListener("invalid", event => {
-                event.preventDefault(),
-                customValidation(event)
-                });
-                field.addEventListener("blur", customValidation)
             }) 
         const formError = document.querySelector(".validate-error");
         if (formError) {
