@@ -190,14 +190,19 @@ input:valid ~ label {
 }
 
 
-.input span.error {
-    display: flex;
+span.error {
+    margin-left: 40px;
     padding: 0;
+    border-radius: 10px;
+    font-size: 10px;
+
+    max-width: 300px;
+    margin-top: 5px;
 
     background-color: rgba(255, 0, 0, 0.2);
 }
 
-.input span.error.active {
+span.error.active {
     border: 1px solid red;
     padding: 0.4em;
 }
