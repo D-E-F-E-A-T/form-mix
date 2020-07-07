@@ -99,6 +99,13 @@ form.addEventListener("animationend", event => {
             fundoQuad.appendChild(li);
         };
     }
+    if (event.animationName == "down") {
+        document.getElementById('modal').style.top = "0";
+        const spanModal = document.getElementById('spanmodal')
+        spanModal.addEventListener("click", event => {
+        document.getElementById('modal').style.top = "150vh";
+        })
+    }
 });
 
 const btnDarkMode = document.querySelector("input#darkmode")
