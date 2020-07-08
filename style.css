@@ -178,6 +178,8 @@ input ~ label {
     top: 16px;
     left: 0;
 
+    z-index: 4;
+
     color: rgba(255, 255, 255, 0.6) ;
     transition: .4s;
 }
@@ -187,6 +189,7 @@ input:valid ~ label {
     transform: translateY(-24px);
     font-size: 0.8em;
     letter-spacing: 0.1em;
+
 }
 
 
@@ -198,6 +201,8 @@ span.error {
 
     max-width: 300px;
     margin-top: 5px;
+
+    z-index: 3;
 
     background-color: rgba(255, 0, 0, 0.2);
 }

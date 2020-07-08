@@ -51,20 +51,21 @@ function customValidation(event) {
 
     validation()
 }
-
-btnSubmit.addEventListener("click", event => {
     fields.forEach(field => {
-        field.addEventListener("invalid", event => {
+        field.addEventListener("blur", event => {
             event.preventDefault(),
-                customValidation(event)
-        })
-        if (field.value == "" || !field.validity.valid) form.classList.add("validate-error")
-        field.addEventListener("blur", customValidation)
-    })
-
-
+            customValidation(event)
+        });
+    });
+    
+ btnSubmit.addEventListener("click", event => {    
     const formError = document.querySelector(".validate-error");
     event.preventDefault()
+    
+    fields.forEach(field => {
+    if (!field.validity.valid) form.classList.add("validate-error")
+    });
+
     if (formError) {
         formError.addEventListener("animationend", event => {
             if (event.animationName == "treme") {
@@ -75,7 +76,6 @@ btnSubmit.addEventListener("click", event => {
         form.classList.add("form-hide");
     }
 });
-
 form.addEventListener("animationend", event => {
     if (event.animationName == "move") {
         const fundoQuad = document.querySelector("ul.quadrados");
