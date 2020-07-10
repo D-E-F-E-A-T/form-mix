@@ -59,13 +59,12 @@ function customValidation(event) {
     });
     
  btnSubmit.addEventListener("click", event => {    
-    const formError = document.querySelector(".validate-error");
     event.preventDefault()
-    
     fields.forEach(field => {
     if (!field.validity.valid) form.classList.add("validate-error")
     });
-
+    
+    const formError = document.querySelector(".validate-error"); 
     if (formError) {
         formError.addEventListener("animationend", event => {
             if (event.animationName == "treme") {
@@ -75,7 +74,9 @@ function customValidation(event) {
     } else {
         form.classList.add("form-hide");
     }
+
 });
+
 form.addEventListener("animationend", event => {
     if (event.animationName == "move") {
         const fundoQuad = document.querySelector("ul.quadrados");
